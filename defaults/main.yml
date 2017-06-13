@@ -17,6 +17,9 @@ moin_group: moin
 # Set this to no if the user/group already exists (e.g. when using apache).
 moin_user_create: yes
 
+# SSL port.
+moin_ssl_listen: 443
+
 moin_wikis:
 - name: testwiki        # needs to be comprised of ASCII characters
   vhost: moin.local     # apache name-based virtual host

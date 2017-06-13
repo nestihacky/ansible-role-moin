@@ -1,5 +1,7 @@
+Listen {{ moin_ssl_listen }} https
+
 {% for wiki in moin_wikis %}
-<VirtualHost *:443>
+<VirtualHost *:{{ moin_ssl_listen }}>
     ServerName   {{ wiki.vhost }}
     DocumentRoot {{ moin_data_dir }}/documentroot
 

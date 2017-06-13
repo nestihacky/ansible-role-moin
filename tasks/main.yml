@@ -22,6 +22,22 @@
     state: present
   when: moin_user_create
 
+- name: allow port in selinux
+  seport:
+    ports: "{{ moin_ssl_listen }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when: common_selinux
+
+- name: set correct context for mailserver data dir
+  command: 'semanage fcontext -a -t httpd_sys_rw_content_t "{{ moin_data_dir }}(/.*)?"'
+  when: common_selinux
+
+- name: restore context for mailserver data dir
+  command: 'restorecon -R "{{ moin_data_dir }}"'
+  when: common_selinux
+
 - name: create data dirs
   file:
     name: "{{ item }}"
